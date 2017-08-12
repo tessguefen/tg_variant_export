@@ -1,0 +1,286 @@
+<MvFUNCTION NAME = "Module_Description" PARAMETERS = "module var" STANDARDOUTPUTLEVEL = "">
+	<MvASSIGN NAME = "l.module:code"		VALUE = "tg_variant_export">
+	<MvASSIGN NAME = "l.module:name"		VALUE = "Export Variants to CSV or XML">
+	<MvASSIGN NAME = "l.module:provider"	VALUE = "Tess Guefen">
+	<MvASSIGN NAME = "l.module:version"		VALUE = "1.000">
+	<MvASSIGN NAME = "l.module:api_ver"		VALUE = "9.00">
+	<MvASSIGN NAME = "l.module:features"	VALUE = "export">
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "ExportModule_Export" PARAMETERS = "module var" STANDARDOUTPUTLEVEL = "" ERROROUTPUTLEVEL = "">
+	<MvIF EXPR = "{ NOT g.Variant_Export_Continue }">
+		<MvIF EXPR = "{ sexists( '/test.xml' ) }">
+			<MvASSIGN NAME = "l.success" VALUE = "{ sdelete( '/test.xml' ) }">
+		</MvIF>
+	</MvIF>
+
+	<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Start( 'Variants Export Progress', 'EXPT' ) }">
+	<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Show() }">
+
+	<MvEVAL EXPR = "{ Load_Variants_Offset( g.Variant_Offset, 100, g.Total_Variant_Count, l.variants ) }">
+
+	<MvFOREACH ITERATOR = "l.variant" ARRAY = "l.variants">
+
+		<MvASSIGN NAME = "g.Progress_Bar" VALUE = "{ g.Progress_Bar + 1 }">
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Update( g.Progress_Bar, g.Total_Variant_Count ) }">
+
+		<MvEVAL EXPR = "{ XML_Template_ProductVariant_Add( l.variant:master_code, l.variant:options, l.variant:parts, l.variant:pricing, l.curr_output) }">
+		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.curr_output }">
+
+	</MvFOREACH>
+
+	<MvIF EXPR = "{ sexists( '/test.xml' ) }">
+		<MvASSIGN NAME = "l.success" VALUE = "{ file_append( '/test.xml', 'script', l.output ) }">
+	<MvELSE>
+		<MvASSIGN NAME = "l.success" VALUE = "{ file_create( '/test.xml', 'script', l.output ) }">
+	</MvIF>
+
+	<MvIF EXPR = "{ g.Progress_Bar GE g.Total_Variant_Count }">
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_ProgressComplete( 'Exported Variants.' ) }">
+		<MvASSIGN NAME = "g.Variant_Export_Continue" VALUE = "0">
+	<MvELSE>
+		<MvASSIGN NAME = "g.Variant_Export_Continue" VALUE = "1">
+	</MvIF>
+
+	<MvHIDE FIELDS = "g.Variant_Offset,g.Variant_Export_Continue,g.FormatType,g.Module_Code,g.Progress_Bar">
+	<MvFUNCTIONRETURN VALUE = 1>
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "ExportModule_Validate" PARAMETERS = "module var" STANDARDOUTPUTLEVEL = "">
+	<MvFUNCTIONRETURN VALUE = 1>
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "ExportModule_Screen" PARAMETERS = "module var" STANDARDOUTPUTLEVEL = "text, html, compresswhitespace">
+	<MvIF EXPR = "{ g.Variant_Export_Continue EQ 1 }">
+		<script type="text/javascript">
+			function exp_continue()
+			{
+				document.forms[ Screen ].submit();
+			}
+			window.onload = exp_continue;
+		</script>
+
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_End() }">
+
+		<MvFUNCTIONRETURN VALUE = 1>
+	</MvIF>
+	<MvEVAL EXPR = "{ [ g.Module_Admin ].BeginScreen_Start( 'Export Variants to CSV or XML', 'EXPT', '' ) }">
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Element_ExportProgressBar_JavaScript( 'Exporting Variants...', 'EXPT', 'EXPT' ) }">
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Element_ExportProgressBar_CSS() }">
+		<MvEVAL EXPR = "{ [ g.Module_Admin ].BeginScreen_End( 'Export Variants to CSV or XML', 'EXPT', '' ) }">
+		<MvDO FILE = "{ g.Module_Admin }" NAME = "l.ok" VALUE = "{ BeginContent() }">
+
+			<div style="font-family: sans-serif;">
+				<MvHIDE FIELDS = "g.Module_Code">
+				<MvEVAL EXPR = "{ [ g.Module_Admin ].Draw_FieldSet_Open( 'Options', 110 ) }">
+					<table cellspacing="5">
+						<tr>
+							<td valign="top">File Format</td>
+							<td>
+								<MvIF EXPR = "{ g.FormatType EQ 'CSV' }">
+									<input type="radio" name="FormatType" value="CSV" checked /> CSV<br />
+									<input type="radio" name="FormatType" value="XML" /> XML
+								<MvELSE>
+									<input type="radio" name="FormatType" value="CSV" /> CSV<br />
+									<input type="radio" name="FormatType" value="XML" checked /> XML
+								</MvIF>
+							</td>
+						</tr>
+						<tr>
+							<td valign="top">File Path</td>
+							<td>
+								
+							</td>
+						</tr>
+					</table>
+				<MvEVAL EXPR = "{ [ g.Module_Admin ].Draw_FieldSet_Close() }">
+			</div>
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Element_ExportProgressBar_HTML() }">
+		<MvEVAL EXPR = "{ [ g.Module_Admin ].EndContent() }">
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Buttons( 'Export', 'EXPT' ) }">
+	<MvEVAL EXPR = "{ [ g.Module_Admin ].EndScreen() }">
+	<MvFUNCTIONRETURN VALUE = 1>
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "Total_Variant_Count" PARAMETERS = "" STANDARDOUTPUTLEVEL = "">
+	<MvOPENVIEW NAME	= "Merchant"
+				VIEW	= "Variant_Count"
+				QUERY	= "{ 'SELECT COUNT(DISTINCT(variant_id)) as variant_count FROM ' $ g.Store_Table_Prefix $ 'ProductVariants' }">
+	<MvIF EXPR = "{ g.MvOPENVIEW_Error }">
+		<MvFUNCTIONRETURN VALUE = "{ [ g.Module_Library_Utilities ].Error( 'TGVE-ERROR-1', g.MvOPENVIEW_Error ) }">
+	</MvIF>
+	<MvASSIGN NAME = "l.Total_Variant_Count" VALUE = "{ Variant_Count.d.variant_count }">
+	<MvCLOSEVIEW NAME = "Merchant" VIEW = "Variant_Count">
+	<MvFUNCTIONRETURN VALUE = "{ l.Total_Variant_Count }">
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "Load_Variants_Offset" PARAMETERS = "offset var, limit, total_variants var, variants var" STANDARDOUTPUTLEVEL = "">
+	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_SELECT( l.query, 'pv.product_id as product_id, pv.variant_id as variant_id' ) }">
+	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_FROM( l.query, g.Store_Table_Prefix $ 'ProductVariantParts', 'pv' ) }">
+	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_GROUP_BY( l.query, 'pv.product_id, pv.variant_id' ) }">
+	<MvASSIGN NAME = "l.built_query"	VALUE = "{ [ g.Module_Library_DB ].SQL_Query_Build( l.query, l.search_fields ) }">
+
+	<MvIF EXPR = "{ NOT [ g.Module_Library_DB ].SQL_Query_Count( l.query, l.total_variants ) }">
+		<MvFUNCTIONRETURN VALUE = "{ [ g.Module_Library_Utilities ].Error( 'TGVE-ERROR-2', g.Error_Message ) }">
+	<MvELSEIF EXPR = "{ NOT [ g.Module_Library_Native_DBAPI ].DB_OPENVIEW_Range( 'Merchant', 'Load_Variants', l.built_query, l.fields, l.offset, l.limit ) }">
+		<MvFUNCTIONRETURN VALUE = "{ [ g.Module_Library_Utilities ].Error( 'TGVE-ERROR-3', g.MvOPENVIEW_Error ) }">
+	</MvIF>
+
+	<MvASSIGN NAME = "l.variant_count" VALUE = "0">
+	<MvASSIGN NAME = "l.counter" VALUE = "1">
+	<MvWHILE EXPR = "{ ( NOT Load_Variants.d.EOF ) AND ( ( l.limit EQ 0 ) OR ( l.variant_count LT l.limit ) ) }">
+		<MvASSIGN NAME = "l.product"	VALUE = "">
+		<MvASSIGN NAME = "l.parts"		VALUE = "">
+		<MvASSIGN NAME = "l.options"	VALUE = "">
+
+		<MvASSIGN NAME = "l.master_id" VALUE = "{ Load_Variants.d.product_id }">
+		<MvASSIGN NAME = "l.variant_id" VALUE = "{ Load_Variants.d.variant_id }">
+
+		<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "master_id" VALUE = "{ l.master_id }">
+		<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "variant_id" VALUE = "{ l.variant_id }">
+
+
+		<MvIF EXPR = "{ [ g.Module_Library_DB ].Product_Load_ID( l.master_id, l.product )  }">
+			<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "master_code" VALUE = "{ l.product:code }">
+		</MvIF>
+
+		<MvIF EXPR = "{ [ g.Module_Library_DB ].ProductVariantPartList_Load_Variant( l.master_id, l.variant_id, l.variant_parts  ) }">
+			<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "parts" VALUE = "{ Read_Variant_Parts( l.variant_parts ) }">
+		</MvIF>
+
+		<MvIF EXPR = "{ [ g.Module_Library_DB ].ProductVariantPricing_Load_Variant( l.master_id, l.variant_id, l.variant_pricing ) }">
+			<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "pricing" VALUE = "{ Read_Variant_Pricing( l.variant_pricing ) }">
+		</MvIF>
+
+		<MvIF EXPR = "{ [ g.Module_Library_DB ].ProductVariantList_Load_Variant( l.master_id, l.variant_id, l.options ) }">
+			<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "options" VALUE = "{ Read_Variant_Options( l.options ) }">
+		</MvIF>
+
+		<MvASSIGN NAME = "l.counter" VALUE = "{ l.counter + 1 }">
+		<MvASSIGN NAME = "l.variant_count" VALUE = "{ l.variant_count + 1 }">
+		<MvSKIP NAME = "Merchant" VIEW = "Load_Variants" ROWS = 1>
+	</MvWHILE>
+	<MvCLOSEVIEW NAME = "Merchant" VIEW = "Load_Variants">
+	<MvASSIGN NAME = "l.offset" VALUE = "{ l.offset + l.variant_count }">
+	<MvFUNCTIONRETURN VALUE = 1>
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "XML_Template_ProductVariant_Add" PARAMETERS = "master_code, options var, parts var, pricing var, output var" STANDARDOUTPUTLEVEL = "">
+	<MvASSIGN NAME = "l.break" VALUE = "{ asciichar( 10 ) }">
+	<MvIF EXPR = "{ miva_array_elements( l.options ) GT 0 }">
+		<MvASSIGN NAME = "l.output" VALUE = "{ '<ProductVariant_Add product_code=\"' $ l.master_code $ '\">' $ l.break }" />
+	<MvELSE>
+		<MvASSIGN NAME = "l.output" VALUE = "{ '<ProductVariant_Update_Default product_code=\"' $ l.master_code $ '\">' $ l.break }" />
+	</MvIF>
+
+		<MvCOMMENT>
+		|
+		|	Options
+		|
+		</MvCOMMENT>
+
+		<MvIF EXPR = "{ miva_array_elements( l.options ) GT 0 }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Options>' $ l.break }" />
+				<MvFOREACH ITERATOR = "l.option" ARRAY = "l.options">
+					<MvIF EXPR = "{ l.option:attribute:attemp_id GT 0 }">
+						<MvIF EXPR = "{ ISNULL l.option:option:code }">
+							<MvIF EXPR = "{ l.option:option_id EQ 1 }">
+								<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<AttributeTemplateAttribute_Boolean attribute_code=\"' $ l.option:attribute:code $ '\" attributetemplateattribute_code=\"' $ l.option:product_attribute:code $ '\" present=\"true\" />' $ l.break }">
+							<MvELSE>
+								<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<AttributeTemplateAttribute_Boolean attribute_code=\"' $ l.option:attribute:code $ '\" attributetemplateattribute_code=\"' $ l.option:product_attribute:code $ '\" present=\"false\" />' $ l.break }">
+							</MvIF>
+						<MvELSE>
+							<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<AttributeTemplateAttribute_Option attribute_code=\"' $ l.option:attribute:code $ '\" attributetemplateattribute_code=\"' $ l.option:product_attribute:code $ '\" option_code=\"' $ l.option:option:code $ '\" />' $ l.break }">
+						</MVIF>
+					<MvELSE>
+						<MvIF EXPR = "{ ISNULL l.option:option:code }">
+							<MvIF EXPR = "{ l.option:option_id EQ 1 }">
+								<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Attribute_Boolean attribute_code=\"' $ l.option:attribute:code $ '\" present=\"true\" />' $ l.break }">
+							<MvELSE>
+								<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Attribute_Boolean attribute_code=\"' $ l.option:attribute:code $ '\" present=\"false\" />' $ l.break }">
+							</MvIF>
+						<MvELSE>
+							<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Attribute_Option attribute_code=\"' $ l.option:attribute:code $ '\" option_code=\"' $ l.option:option:code $ '\" />' $ l.break }">
+						</MVIF>
+					</MvIF>
+				</MvFOREACH>
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '</Options>' $ l.break }" />
+		</MvIF>
+
+		<MvCOMMENT>
+		|
+		|	Parts
+		|
+		</MvCOMMENT>
+
+		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Parts>' $ l.break }" />
+			<MvFOREACH ITERATOR = "l.part" ARRAY = "l.parts">
+				<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Part product_code=\"' $ l.part:code $ '\" quantity=\"' $ l.part:quantity $ '\" />' $ l.break }">
+			</MvFOREACH>
+		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '</Parts>' $ l.break }" />
+
+		<MvCOMMENT>
+		|
+		|	Pricing
+		|
+		</MvCOMMENT>
+
+		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<ProductVariantPricing>' $ l.break }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Method>'	$ l.pricing:method_name	$	'</Method>'	$ l.break }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Price>'		$ l.pricing:price		$	'</Price>'	$ l.break }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Cost>'		$ l.pricing:cost		$	'</Cost>'	$ l.break }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '<Weight>'	$ l.pricing:weight		$	'</Weight>'	$ l.break }">
+		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '</ProductVariantPricing>' $ l.break }">
+		
+	<MvIF EXPR = "{ miva_array_elements( l.options ) GT 0 }">
+		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '</ProductVariant_Add>' $ l.break }" />
+	<MvELSE>
+		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ '</ProductVariant_Update_Default>' $ l.break }" />
+	</MvIF>
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "Read_Variant_Parts" PARAMETERS = "parts var" STANDARDOUTPUTLEVEL = "">
+	<MvASSIGN NAME = "l.current_parts" VALUE = "{ l.parts }">
+	<MvFOREACH ITERATOR = "l.part" ARRAY = "l.current_parts" INDEX = "l.parts_index">
+		<MvIF EXPR = "{ [ g.Module_Library_DB ].Product_Load_ID( l.part:part_id, l.part:product ) }">
+			<MvASSIGN NAME = "l.new_parts" INDEX = "{ l.parts_index }" MEMBER = "code"			VALUE = "{ l.part:product:code }">
+			<MvASSIGN NAME = "l.new_parts" INDEX = "{ l.parts_index }" MEMBER = "product_id"	VALUE = "{ l.part:product:product_id }">
+			<MvASSIGN NAME = "l.new_parts" INDEX = "{ l.parts_index }" MEMBER = "part_id"		VALUE = "{ l.part:part_id }">
+			<MvASSIGN NAME = "l.new_parts" INDEX = "{ l.parts_index }" MEMBER = "quantity"		VALUE = "{ l.part:quantity }">
+		</MvIF>
+	</MvFOREACH>
+	<MvIF EXPR = "{ l.new_parts }">
+		<MvFUNCTIONRETURN VALUE = "{ l.new_parts }">
+	</MvIF>
+	<MvFUNCTIONRETURN VALUE = "{ l.parts }">
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "Read_Variant_Pricing" PARAMETERS = "pricing var" STANDARDOUTPUTLEVEL = "">
+	<MvIF EXPR = "{ l.pricing:method EQ 1 }">
+		<MvASSIGN NAME = "l.new_pricing" MEMBER = "method_name" VALUE = "specific">
+	<MvELSEIF EXPR = "{ l.pricing:method EQ 2 }">
+		<MvASSIGN NAME = "l.new_pricing" MEMBER = "method_name" VALUE = "sum">
+	<MvELSE>
+		<MvASSIGN NAME = "l.new_pricing" MEMBER = "method_name" VALUE = "master">
+	</MvIF>
+	<MvASSIGN NAME = "l.new_pricing" MEMBER = "method" VALUE = "{ l.pricing:method }">
+	<MvASSIGN NAME = "l.new_pricing" MEMBER = "price" VALUE = "{ l.pricing:price }">
+	<MvASSIGN NAME = "l.new_pricing" MEMBER = "cost" VALUE = "{ l.pricing:cost }">
+	<MvASSIGN NAME = "l.new_pricing" MEMBER = "weight" VALUE = "{ l.pricing:weight }">
+	<MvFUNCTIONRETURN VALUE = "{ l.new_pricing }" />
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "Read_Variant_Options" PARAMETERS = "options var" STANDARDOUTPUTLEVEL = "">
+	<MvFOREACH ITERATOR = "l.option" ARRAY = "l.options" INDEX = "l.options_index">
+		<MvIF EXPR = "{ l.option:attmpat_id GT 0 }">
+			<MvDO FILE = "{ g.Module_Library_DB }" NAME = "l.success" VALUE = "{ Attribute_Load_ID( l.option:attr_id, l.option:attribute ) }">
+			<MvDO FILE = "{ g.Module_Feature_ATT_DB }" NAME = "l.success" VALUE = "{ AttributeTemplateAttr_Load_ID( l.option:attmpat_id, l.option:product_attribute ) }">
+			<MvDO FILE = "{ g.Module_Feature_ATT_DB }" NAME = "l.success" VALUE = "{ AttributeTemplate_Load_ID( l.option:attribute:attemp_id, l.option:attributetemplate ) }">
+			<MvDO FILE = "{ g.Module_Feature_ATT_DB }" NAME = "l.success" VALUE = "{ AttributeTemplateOption_Load_ID( l.option:option_id, l.option:option ) }">
+		<MvELSE>
+			<MvDO FILE = "{ g.Module_Library_DB }" NAME = "l.success" VALUE = "{ Attribute_Load_ID( l.option:attr_id, l.option:attribute ) }">
+			<MvDO FILE = "{ g.Module_Library_DB }" NAME = "l.success" VALUE = "{ Option_Load_ID( l.option:option_id, l.option:option ) }">
+		</MvIF>
+	</MvFOREACH>
+	<MvFUNCTIONRETURN VALUE = "{ l.options }" />
+</MvFUNCTION>
