@@ -125,7 +125,7 @@
 
 		<MvFUNCTIONRETURN VALUE = 1>
 	</MvIF>
-	
+
 	<MvEVAL EXPR = "{ [ g.Module_Admin ].BeginScreen_Start( 'Export Variants to CSV or XML', 'EXPT', '' ) }">
 
 		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Element_ExportProgressBar_JavaScript( 'Exporting Variants...', 'EXPT', 'EXPT' ) }">
@@ -402,7 +402,11 @@
 			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.break }">
 			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.master_code,				l.delim ) $ l.delim }">
 			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.part:code,					l.delim ) $ l.delim }">
-			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.option:attribute:code,		l.delim ) $ l.delim }">
+			<MvIF EXPR = "{ l.option:attribute:attemp_id GT 0 }">
+				<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.option:product_attribute:code,		l.delim ) $ l.delim }">
+			<MvELSE>
+				<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.option:attribute:code,				l.delim ) $ l.delim }">
+			</MvIF>
 			<MvIF EXPR = "{ ISNULL l.option:option:code }">
 				<MvIF EXPR = "{ l.option:option_id EQ 1 }">
 					<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( 1, l.delim ) }">
