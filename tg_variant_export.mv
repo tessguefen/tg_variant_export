@@ -30,7 +30,7 @@
 
 	<MvFOREACH ITERATOR = "l.variant" ARRAY = "l.variants">
 		<MvASSIGN NAME = "l.curr_output" VALUE = "">
-		
+
 		<MvIF EXPR = "{ g.FormatType EQ 'XML' }">
 			<MvEVAL EXPR = "{ XML_Template_ProductVariant_Add( l.variant:master_code, l.variant:options, l.variant:parts, l.variant:pricing, l.curr_output) }">
 		<MvELSE>
@@ -131,7 +131,7 @@
 							<td valign="top"><strong>Export Variants to File:</strong></td>
 							<td width="100%">
 								<input type="text" name="VariantsExport_File" id="jsVariantsExport_File" size="40" value="{ encodeentities( g.VariantsExport_File ) }"><br />
-								<em>This is located in the private directory</em>
+								<em>This is located in the private directory. This will be deleted if it already exists.</em>
 							</td>
 						</tr>
 						<tr>
@@ -201,9 +201,10 @@
 	<MvASSIGN NAME = "l.counter" VALUE = "1">
 
 	<MvWHILE EXPR = "{ ( NOT Load_Variants.d.EOF ) AND ( ( l.limit EQ 0 ) OR ( l.variant_count LT l.limit ) ) }">
-		<MvASSIGN NAME = "l.product"	VALUE = "">
-		<MvASSIGN NAME = "l.parts"		VALUE = "">
-		<MvASSIGN NAME = "l.options"	VALUE = "">
+		<MvASSIGN NAME = "l.product"		VALUE = "">
+		<MvASSIGN NAME = "l.parts"			VALUE = "">
+		<MvASSIGN NAME = "l.options"		VALUE = "">
+		<MvASSIGN NAME = "l.variant_parts"	VALUE = "">
 
 		<MvASSIGN NAME = "l.master_id" VALUE = "{ Load_Variants.d.product_id }">
 		<MvASSIGN NAME = "l.variant_id" VALUE = "{ Load_Variants.d.variant_id }">
@@ -376,6 +377,10 @@
 		OPTION_CODE
 	</MvCOMMENT>
 
+	<MvIF EXPR = "{ miva_array_elements( l.options ) EQ 0 }">
+		<MvFUNCTIONRETURN VALUE = 1>
+	</MvIF>
+
 	<MvASSIGN NAME = "l.delim" VALUE = "{ asciichar( 44 ) }">
 	<MvASSIGN NAME = "l.break" VALUE = "{ asciichar( 10 ) }">
 	<MvASSIGN NAME = "l.output" VALUE = "">
@@ -387,7 +392,15 @@
 			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.master_code,				l.delim ) $ l.delim }">
 			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.part:code,					l.delim ) $ l.delim }">
 			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.option:attribute:code,		l.delim ) $ l.delim }">
-			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.option:option:code,		l.delim ) }">
+			<MvIF EXPR = "{ ISNULL l.option:option:code }">
+				<MvIF EXPR = "{ l.option:option_id EQ 1 }">
+					<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( 1, l.delim ) }">
+				<MvELSE>
+					<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( 0, l.delim ) }">
+				</MvIF>
+			<MvELSE>
+				<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.option:option:code, l.delim ) }">
+			</MvIF>
 		</MvFOREACH>
 
 	</MvFOREACH>
