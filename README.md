@@ -1,6 +1,5 @@
 # Export Variants to CSV or XML
 ### Notes for self.
-- Look into Progress bar & wonkiness.
 - Examples of CSV imports
   - Difference between Specific & Sum of parts?
   - Can you import default variants with CSV?
