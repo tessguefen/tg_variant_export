@@ -1,0 +1,710 @@
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_s_blue" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_s_yellow" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="white" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_s_white" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="red" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_s_red" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_m_blue" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_m_yellow" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="white" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_m_white" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="red" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_m_red" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="l" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_l_blue" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="Master_Product">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="l" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+	</Options>
+	<Parts>
+		<Part product_code="Master_Product_l_yellow" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="lacroix_yum">
+	<Options>
+		<AttributeTemplateAttribute_Boolean attribute_code="lacroixoptions" attributetemplateattribute_code="free_try" present="true" />
+		<AttributeTemplateAttribute_Option attribute_code="lacroixoptions" attributetemplateattribute_code="pkg" option_code="6pk" />
+		<AttributeTemplateAttribute_Option attribute_code="lacroixoptions" attributetemplateattribute_code="flavor" option_code="mp" />
+	</Options>
+	<Parts>
+		<Part product_code="lacroix_yum_mp_6pk_free_tryY" quantity="1" />
+		<Part product_code="Master_Product_s_blue" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="lacroix_yum">
+	<Options>
+		<AttributeTemplateAttribute_Boolean attribute_code="lacroixoptions" attributetemplateattribute_code="free_try" present="false" />
+		<AttributeTemplateAttribute_Option attribute_code="lacroixoptions" attributetemplateattribute_code="pkg" option_code="6pk" />
+		<AttributeTemplateAttribute_Option attribute_code="lacroixoptions" attributetemplateattribute_code="flavor" option_code="mp" />
+	</Options>
+	<Parts>
+		<Part product_code="lacroix_yum_mp_6pk_free_tryN" quantity="1" />
+		<Part product_code="Master_Product_s_blue" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="lacroix_yum">
+	<Options>
+		<AttributeTemplateAttribute_Option attribute_code="lacroixoptions" attributetemplateattribute_code="flavor" option_code="mp" />
+		<AttributeTemplateAttribute_Option attribute_code="lacroixoptions" attributetemplateattribute_code="pkg" option_code="12pk" />
+		<AttributeTemplateAttribute_Boolean attribute_code="lacroixoptions" attributetemplateattribute_code="free_try" present="true" />
+	</Options>
+	<Parts>
+		<Part product_code="lacroix_yum_mp_12pk_free_tryY" quantity="1" />
+		<Part product_code="Master_Product_s_blue" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="lacroix_yum">
+	<Options>
+		<AttributeTemplateAttribute_Option attribute_code="lacroixoptions" attributetemplateattribute_code="flavor" option_code="mp" />
+		<AttributeTemplateAttribute_Option attribute_code="lacroixoptions" attributetemplateattribute_code="pkg" option_code="12pk" />
+		<AttributeTemplateAttribute_Boolean attribute_code="lacroixoptions" attributetemplateattribute_code="free_try" present="false" />
+	</Options>
+	<Parts>
+		<Part product_code="lacroix_yum_mp_12pk_free_tryN" quantity="1" />
+		<Part product_code="Master_Product_s_blue" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Update_Default product_code="Default_Variant">
+	<Parts>
+		<Part product_code="tshirt_inv" quantity="6" />
+		<Part product_code="test-2_o1" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>specific</Method>
+		<Price>1</Price>
+		<Cost>2</Cost>
+		<Weight>3</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Update_Default>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_blue_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="gradient" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_blue_gradient" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="dots" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_blue_dots" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_blue_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="white" />
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_white_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="green" />
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_green_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_yellow_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="pattern" option_code="gradient" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_yellow_gradient" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="pattern" option_code="dots" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_yellow_dots" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="s" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_s_yellow_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_blue_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="gradient" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_blue_gradient" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="dots" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="size" option_code="m" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_blue_dots" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_blue_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="white" />
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_white_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="green" />
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_green_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_yellow_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="pattern" option_code="gradient" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_yellow_gradient" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="pattern" option_code="dots" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_yellow_dots" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="m" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_m_yellow_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="l" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_blue_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="size" option_code="l" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="pattern" option_code="gradient" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_blue_gradient" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="dots" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="size" option_code="l" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_blue_dots" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+		<Attribute_Option attribute_code="color" option_code="blue" />
+		<Attribute_Option attribute_code="size" option_code="l" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_blue_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+		<Attribute_Option attribute_code="color" option_code="white" />
+		<Attribute_Option attribute_code="size" option_code="l" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_white_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+		<Attribute_Option attribute_code="color" option_code="green" />
+		<Attribute_Option attribute_code="size" option_code="l" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_green_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="plain" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="size" option_code="l" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_yellow_plain" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="gradient" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="size" option_code="l" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_yellow_gradient" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="dots" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="size" option_code="l" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_yellow_dots" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
+<ProductVariant_Add product_code="crazy_attributes_variants">
+	<Options>
+		<Attribute_Option attribute_code="pattern" option_code="striped" />
+		<Attribute_Option attribute_code="color" option_code="yellow" />
+		<Attribute_Option attribute_code="size" option_code="l" />
+	</Options>
+	<Parts>
+		<Part product_code="crazy_attributes_variants_l_yellow_striped" quantity="1" />
+	</Parts>
+	<ProductVariantPricing>
+		<Method>sum</Method>
+		<Price>0</Price>
+		<Cost>0</Cost>
+		<Weight>0</Weight>
+	</ProductVariantPricing>
+</ProductVariant_Add>
