@@ -14,19 +14,33 @@
 		</MvIF>
 	</MvIF>
 
+	<MvIF EXPR = "{ ( g.FormatType EQ 'CSV' ) AND ( ISNULL g.Variant_Progress ) }">
+		<MvASSIGN NAME = "l.csv_header" VALUE = "{ CSV_Template_Header() }">
+		<MvASSIGN NAME = "l.success" VALUE = "{ file_create( '/' $ g.VariantsExport_File, 'data', l.csv_header ) }">
+	</MvIF>
+
 	<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Start( 'Variants Export Progress', 'EXPT' ) }">
 	<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Show() }">
 
-	<MvEVAL EXPR = "{ Load_Variants_Offset( g.Variant_Offset, 100, g.Total_Variant_Count, l.variants ) }">
+	<MvIF EXPR = "{ g.Total_Variant_Count }">
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Update( g.Variant_Progress, g.Total_Variant_Count ) }">
+	</MvIF>
+
+	<MvEVAL EXPR = "{ Load_Variants_Offset( g.Variant_Progress, 10, g.Total_Variant_Count, l.variants ) }">
 
 	<MvFOREACH ITERATOR = "l.variant" ARRAY = "l.variants">
+		<MvASSIGN NAME = "l.curr_output" VALUE = "">
+		
+		<MvIF EXPR = "{ g.FormatType EQ 'XML' }">
+			<MvEVAL EXPR = "{ XML_Template_ProductVariant_Add( l.variant:master_code, l.variant:options, l.variant:parts, l.variant:pricing, l.curr_output) }">
+		<MvELSE>
+			<MvEVAL EXPR = "{ CSV_Template_ProductVariant_Add( l.variant:master_code, l.variant:options, l.variant:parts, l.variant:pricing, l.curr_output) }">
+		</MvIF>
 
-		<MvASSIGN NAME = "g.Progress_Bar" VALUE = "{ g.Progress_Bar + 1 }">
-		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Update( g.Progress_Bar, g.Total_Variant_Count ) }">
-
-		<MvEVAL EXPR = "{ XML_Template_ProductVariant_Add( l.variant:master_code, l.variant:options, l.variant:parts, l.variant:pricing, l.curr_output) }">
 		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.curr_output }">
 
+		<MvASSIGN NAME = "g.Variant_Progress" VALUE = "{ g.Variant_Progress + 1 }">
+		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Update( g.Variant_Progress, g.Total_Variant_Count ) }">
 	</MvFOREACH>
 
 	<MvIF EXPR = "{ fexists( '/' $ g.VariantsExport_File ) }">
@@ -35,7 +49,7 @@
 		<MvASSIGN NAME = "l.success" VALUE = "{ file_create( '/' $ g.VariantsExport_File, 'data', l.output ) }">
 	</MvIF>
 
-	<MvIF EXPR = "{ g.Progress_Bar GE g.Total_Variant_Count }">
+	<MvIF EXPR = "{ g.Variant_Progress GE g.Total_Variant_Count }">
 
 		<MvIF EXPR = "{ g.VariantsExport_SendEmail }">
 			<MvDO FILE = "{ g.Module_Library_Utilities }" NAME = "l.null" VALUE = "{ Send_Email_Attachment( g.VariantsExport_Email, g.VariantsExport_Email, '', 'Variant Export', g.VariantsExport_File, '/', 'data' ) }">
@@ -43,19 +57,21 @@
 		</MvIF>
 
 		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_ProgressComplete( 'Exported Variants.' ) }">
+		<MvEVAL EXPR = "{ [ g.Module_Admin ].Admin_Log_Action( 'TGVE-SUCCESS-2', 'Variants Exported to ' $ g.VariantsExport_File  ) }">
 		<MvASSIGN NAME = "g.Variant_Export_Continue" VALUE = "0">
+		<MvASSIGN NAME = "g.Variant_Progress" VALUE = "0">
 	<MvELSE>
 		<MvASSIGN NAME = "g.Variant_Export_Continue" VALUE = "1">
 	</MvIF>
 
-	<MvHIDE FIELDS = "	g.Variant_Offset,
-						g.Variant_Export_Continue,
+	<MvHIDE FIELDS = "	g.Variant_Export_Continue,
 						g.FormatType,
 						g.Module_Code,
-						g.Progress_Bar,
+						g.Variant_Progress,
 						g.VariantsExport_File,
 						g.VariantsExport_SendEmail,
-						g.VariantsExport_Email">
+						g.VariantsExport_Email,
+						g.Total_Variant_Count">
 	<MvFUNCTIONRETURN VALUE = 1>
 </MvFUNCTION>
 
@@ -114,7 +130,8 @@
 						<tr>
 							<td valign="top"><strong>Export Variants to File:</strong></td>
 							<td width="100%">
-								<input type="text" name="VariantsExport_File" id="jsVariantsExport_File" size="40" value="{ encodeentities( g.VariantsExport_File ) }">
+								<input type="text" name="VariantsExport_File" id="jsVariantsExport_File" size="40" value="{ encodeentities( g.VariantsExport_File ) }"><br />
+								<em>This is located in the private directory</em>
 							</td>
 						</tr>
 						<tr>
@@ -163,25 +180,18 @@
 	<MvFUNCTIONRETURN VALUE = 1>
 </MvFUNCTION>
 
-<MvFUNCTION NAME = "Total_Variant_Count" PARAMETERS = "" STANDARDOUTPUTLEVEL = "">
-	<MvOPENVIEW NAME	= "Merchant"
-				VIEW	= "Variant_Count"
-				QUERY	= "{ 'SELECT COUNT(DISTINCT(variant_id)) as variant_count FROM ' $ g.Store_Table_Prefix $ 'ProductVariants' }">
-	<MvIF EXPR = "{ g.MvOPENVIEW_Error }">
-		<MvFUNCTIONRETURN VALUE = "{ [ g.Module_Library_Utilities ].Error( 'TGVE-ERROR-1', g.MvOPENVIEW_Error ) }">
-	</MvIF>
-	<MvASSIGN NAME = "l.Total_Variant_Count" VALUE = "{ Variant_Count.d.variant_count }">
-	<MvCLOSEVIEW NAME = "Merchant" VIEW = "Variant_Count">
-	<MvFUNCTIONRETURN VALUE = "{ l.Total_Variant_Count }">
-</MvFUNCTION>
-
 <MvFUNCTION NAME = "Load_Variants_Offset" PARAMETERS = "offset var, limit, total_variants var, variants var" STANDARDOUTPUTLEVEL = "">
 	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_SELECT( l.query, 'pv.product_id as product_id, pv.variant_id as variant_id' ) }">
 	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_FROM( l.query, g.Store_Table_Prefix $ 'ProductVariantParts', 'pv' ) }">
 	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_GROUP_BY( l.query, 'pv.product_id, pv.variant_id' ) }">
 	<MvASSIGN NAME = "l.built_query"	VALUE = "{ [ g.Module_Library_DB ].SQL_Query_Build( l.query, l.search_fields ) }">
 
-	<MvIF EXPR = "{ NOT [ g.Module_Library_DB ].SQL_Query_Count( l.query, l.total_variants ) }">
+	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_SELECT( l.count_query, '1 AS total_count' ) }">
+	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_FROM( l.count_query, g.Store_Table_Prefix $ 'ProductVariantParts', 'pv' ) }">
+	<MvEVAL EXPR = "{ [ g.Module_Library_DB ].SQL_Query_GROUP_BY( l.count_query, 'pv.product_id, pv.variant_id' ) }">
+	<MvASSIGN NAME = "l.count_sql"	VALUE = "{ [ g.Module_Library_DB ].SQL_Query_Build( l.count_query, l.count_fields ) }">
+
+	<MvIF EXPR = "{ NOT [ g.Module_Library_DB ].SQL_Count( l.count_sql, l.count_fields, l.total_variants ) }">
 		<MvFUNCTIONRETURN VALUE = "{ [ g.Module_Library_Utilities ].Error( 'TGVE-ERROR-2', g.Error_Message ) }">
 	<MvELSEIF EXPR = "{ NOT [ g.Module_Library_Native_DBAPI ].DB_OPENVIEW_Range( 'Merchant', 'Load_Variants', l.built_query, l.fields, l.offset, l.limit ) }">
 		<MvFUNCTIONRETURN VALUE = "{ [ g.Module_Library_Utilities ].Error( 'TGVE-ERROR-3', g.MvOPENVIEW_Error ) }">
@@ -189,6 +199,7 @@
 
 	<MvASSIGN NAME = "l.variant_count" VALUE = "0">
 	<MvASSIGN NAME = "l.counter" VALUE = "1">
+
 	<MvWHILE EXPR = "{ ( NOT Load_Variants.d.EOF ) AND ( ( l.limit EQ 0 ) OR ( l.variant_count LT l.limit ) ) }">
 		<MvASSIGN NAME = "l.product"	VALUE = "">
 		<MvASSIGN NAME = "l.parts"		VALUE = "">
@@ -350,4 +361,34 @@
 		</MvIF>
 	</MvFOREACH>
 	<MvFUNCTIONRETURN VALUE = "{ l.options }" />
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "CSV_Template_Header" PARAMETERS = "" STANDARDOUTPUTLEVEL = "">
+	<MvASSIGN NAME = "l.delim" VALUE = "{ asciichar( 44 ) }">
+	<MvFUNCTIONRETURN VALUE = "{ 'MASTER_PRODUCT_CODE' $ l.delim $ 'PART_PRODUCT_CODE' $ l.delim $ 'ATTRIBUTE_CODE' $ l.delim $ 'OPTION_CODE' }">
+</MvFUNCTION>
+
+<MvFUNCTION NAME = "CSV_Template_ProductVariant_Add" PARAMETERS = "master_code, options var, parts var, pricing var, output var" STANDARDOUTPUTLEVEL = "">
+	<MvCOMMENT>
+		MASTER_PRODUCT_CODE
+		PART_PRODUCT_CODE
+		ATTRIBUTE_CODE
+		OPTION_CODE
+	</MvCOMMENT>
+
+	<MvASSIGN NAME = "l.delim" VALUE = "{ asciichar( 44 ) }">
+	<MvASSIGN NAME = "l.break" VALUE = "{ asciichar( 10 ) }">
+	<MvASSIGN NAME = "l.output" VALUE = "">
+
+	<MvFOREACH ITERATOR = "l.part" ARRAY = "l.parts">
+
+		<MvFOREACH ITERATOR = "l.option" ARRAY = "l.options">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.break }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.master_code,				l.delim ) $ l.delim }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.part:code,					l.delim ) $ l.delim }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.option:attribute:code,		l.delim ) $ l.delim }">
+			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ miva_csv_encode( l.option:option:code,		l.delim ) }">
+		</MvFOREACH>
+
+	</MvFOREACH>
 </MvFUNCTION>
