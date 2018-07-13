@@ -33,7 +33,7 @@
 		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Update( g.Variant_Progress, g.Total_Variant_Count ) }">
 	</MvIF>
 
-	<MvEVAL EXPR = "{ Load_Variants_Offset( g.Variant_Progress, 100, g.Total_Variant_Count, l.variants ) }">
+	<MvEVAL EXPR = "{ Load_Variants_Offset( g.Variant_Progress, 250, g.Total_Variant_Count, l.variants ) }">
 
 	<MvFOREACH ITERATOR = "l.variant" ARRAY = "l.variants">
 		<MvASSIGN NAME = "l.curr_output" VALUE = "">
@@ -245,7 +245,6 @@
 		<MvSKIP NAME = "Merchant" VIEW = "Load_Variants" ROWS = 1>
 	</MvWHILE>
 	<MvCLOSEVIEW NAME = "Merchant" VIEW = "Load_Variants">
-	<MvASSIGN NAME = "l.offset" VALUE = "{ l.offset + l.variant_count }">
 	<MvFUNCTIONRETURN VALUE = 1>
 </MvFUNCTION>
 
