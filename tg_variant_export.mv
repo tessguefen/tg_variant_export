@@ -33,7 +33,7 @@
 		<MvEVAL EXPR = "{ [ g.Module_Library_Utilities ].Draw_ExportProgressBar_Update( g.Variant_Progress, g.Total_Variant_Count ) }">
 	</MvIF>
 
-	<MvEVAL EXPR = "{ Load_Variants_Offset( g.Variant_Progress, 10, g.Total_Variant_Count, l.variants ) }">
+	<MvEVAL EXPR = "{ Load_Variants_Offset( g.Variant_Progress, 100, g.Total_Variant_Count, l.variants ) }">
 
 	<MvFOREACH ITERATOR = "l.variant" ARRAY = "l.variants">
 		<MvASSIGN NAME = "l.curr_output" VALUE = "">
@@ -233,8 +233,8 @@
 		</MvIF>
 
 		<MvIF EXPR = "{ [ g.Module_Library_DB ].ProductVariantPricing_Load_Variant( l.master_id, l.variant_id, l.variant_pricing ) }">
-			<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "pricing" VALUE = "{ Read_Variant_Pricing( l.variant_pricing ) }">
 		</MvIF>
+		<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "pricing" VALUE = "{ Read_Variant_Pricing( l.variant_pricing ) }">
 
 		<MvIF EXPR = "{ [ g.Module_Library_DB ].ProductVariantList_Load_Variant( l.master_id, l.variant_id, l.options ) }">
 			<MvASSIGN NAME = "l.variants" INDEX = "{ l.counter }" MEMBER = "options" VALUE = "{ Read_Variant_Options( l.options ) }">
@@ -321,9 +321,9 @@
 
 		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ '<ProductVariantPricing>' $ l.break }">
 			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ l.tab $ '<Method>'	$ l.pricing:method_name	$	'</Method>'	$ l.break }">
-			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ l.tab $ '<Price>'		$ l.pricing:price		$	'</Price>'	$ l.break }">
-			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ l.tab $ '<Cost>'		$ l.pricing:cost		$	'</Cost>'	$ l.break }">
-			<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ l.tab $ '<Weight>'	$ l.pricing:weight		$	'</Weight>'	$ l.break }">
+			<MvIF EXPR = "{ NOT ISNULL l.pricing:price }">	<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ l.tab $ '<Price>'		$ l.pricing:price		$	'</Price>'	$ l.break }"></MvIF>
+			<MvIF EXPR = "{ NOT ISNULL l.pricing:cost }">	<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ l.tab $ '<Cost>'		$ l.pricing:cost		$	'</Cost>'	$ l.break }"></MVIF>
+			<MvIF EXPR = "{ NOT ISNULL l.pricing:weight }">	<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ l.tab $ '<Weight>'	$ l.pricing:weight		$	'</Weight>'	$ l.break }"></MvIF>
 		<MvASSIGN NAME = "l.output" VALUE = "{ l.output $ l.tab $ '</ProductVariantPricing>' $ l.break }">
 
 	<MvIF EXPR = "{ miva_array_elements( l.options ) GT 0 }">
